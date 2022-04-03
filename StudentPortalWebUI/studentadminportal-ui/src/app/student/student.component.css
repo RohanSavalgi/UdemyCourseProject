@@ -1,0 +1,47 @@
+.page-header{
+  background-color: #f1f1f1;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.page-header h1{
+  padding-left:9em;
+  line-height: 1.5;
+  font-size: 200%;
+  margin: 0;
+}
+
+table{
+  width: 100%;
+  color: #f1f1f1;
+}
+
+.mat-table{
+  background: #6464646e;
+}
+
+.searchBox{
+  border: 1px solid rgb(71, 71, 71);
+  outline: none;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  margin:1em
+}
+
+.searchBox:active{
+  border: 1px solid #c2185b;
+
+}
+
+.searchBox:focus{
+  border: 1px solid #c2185b;
+
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  margin-left: 45%;
+
+}

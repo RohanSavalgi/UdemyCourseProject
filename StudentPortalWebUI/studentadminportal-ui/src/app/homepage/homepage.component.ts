@@ -10,14 +10,5 @@ export class HomepageComponent implements OnInit {
 
   constructor(private studentServices : StudentService) { }
 
-  ngOnInit(): void {
-    this.studentServices.getStudent().subscribe(
-      (successResponse) => {
-        console.log(successResponse);
-      },
-      (errorResponse) => {
-        console.log(errorResponse);
-      }
-    );
-  }
+  ngOnInit(): void { }
 }
