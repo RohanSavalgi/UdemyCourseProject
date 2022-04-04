@@ -19,6 +19,7 @@ export class StudentComponent implements OnInit {
 
   @ViewChild(MatPaginator) MatPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
+  filterString = '';
 
   constructor(private studentservice : StudentService) { }
 
@@ -45,6 +46,10 @@ export class StudentComponent implements OnInit {
           console.log(errorRespose)
         }
     )
+  }
+
+  filterFunction(){
+    this.dataSource.filter = this.filterString.trim().toLowerCase();
   }
 
   click() : void {

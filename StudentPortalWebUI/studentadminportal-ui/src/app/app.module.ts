@@ -49,6 +49,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { StudentComponent } from './student/student.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ViewStudentComponent } from './student/view-student/view-student.component';
 
 @NgModule({
   declarations: [
@@ -56,8 +58,10 @@ import { HttpClientModule } from '@angular/common/http';
     NavBarComponent,
     StudentComponent,
     HomepageComponent,
+    ViewStudentComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
