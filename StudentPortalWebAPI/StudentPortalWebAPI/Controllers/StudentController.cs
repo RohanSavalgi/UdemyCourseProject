@@ -29,7 +29,7 @@ namespace StudentPortalWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/{studentId:Guid}")]
+        [Route("[controller]/{studentId:guid}")]
         public async Task<IActionResult> GetStudent([FromRoute] Guid studentId)
         {
             var student = await studentContext.GetStudent(studentId);
@@ -40,5 +40,6 @@ namespace StudentPortalWebAPI.Controllers
             }
             return Ok(mapper.Map<Student>(student));
         }
+
     }
 }

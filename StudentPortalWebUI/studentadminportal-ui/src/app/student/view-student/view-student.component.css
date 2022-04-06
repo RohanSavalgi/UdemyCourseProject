@@ -1,0 +1,20 @@
+.page-header{
+  background-color: #f1f1f1;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.page-header h1{
+  padding-left:9em;
+  line-height: 1.5;
+  font-size: 200%;
+  margin: 0;
+}
+
+.paddedrow{
+  padding: 1em 0;
+}
+
+.mat-form-field{
+  width:100%
+}

@@ -14,7 +14,7 @@ import { StudentService } from './student.service';
 export class StudentComponent implements OnInit {
 
   students: student[] = [];
-  displayedColumns: string[] = ['firstName', 'lastName','dataOfBirth','email','mobile','gender'];
+  displayedColumns: string[] = ['firstName', 'lastName','dataOfBirth','email','mobile','gender','edit'];
   dataSource: MatTableDataSource<student> = new MatTableDataSource<student>();
 
   @ViewChild(MatPaginator) MatPaginator!: MatPaginator;
@@ -24,7 +24,7 @@ export class StudentComponent implements OnInit {
   constructor(private studentservice : StudentService) { }
 
   ngOnInit(): void {
-    this.studentservice.getStudent().subscribe(
+    this.studentservice.getStudents().subscribe(
         (successRespose) => {
           this.students = successRespose;
           console.log(successRespose);
