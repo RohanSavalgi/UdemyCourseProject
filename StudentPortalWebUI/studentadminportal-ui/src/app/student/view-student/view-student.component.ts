@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { student } from 'src/app/models/api-models/student.model';
 import { StudentService } from '../student.service';
 
 @Component({
@@ -10,6 +11,25 @@ import { StudentService } from '../student.service';
 export class ViewStudentComponent implements OnInit {
 
   studentId : string | null | undefined;
+  studentData: student = {
+    id: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    email:'',
+    mobile: 0,
+    profileImageUrl: '',
+    genderId: '',
+    gender: {
+      id: '',
+    description: ''
+    },
+    address: {
+      id: '',
+      postalAddress: '',
+      physicalAddress: '',
+    }
+  }
 
   constructor(private studentService: StudentService,
     private route:ActivatedRoute
@@ -25,7 +45,7 @@ export class ViewStudentComponent implements OnInit {
           this.studentService.getStudent(this.studentId)
           .subscribe(
             (successResponse) =>{
-              console.log(successResponse);
+              this.studentData = successResponse;
             }
           )
         }

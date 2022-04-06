@@ -5,5 +5,4 @@ export interface address
   id: string,
   postalAddress: string,
   physicalAddress: string,
-  studendId : student;
 }
