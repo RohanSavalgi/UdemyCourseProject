@@ -34,12 +34,11 @@ namespace StudentPortalWebAPI.Controllers
         {
             var student = await studentContext.GetStudent(studentId);
 
-            if(student == null)
+            if (student == null)
             {
                 return NotFound();
             }
             return Ok(mapper.Map<Student>(student));
         }
-
     }
 }

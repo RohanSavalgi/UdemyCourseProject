@@ -16,6 +16,11 @@ namespace StudentPortalWebAPI.Repositories
             this.context = context;
         }
 
+        public async Task<List<Gender>> GetGenders()
+        {
+            return await context.Gender.ToListAsync();
+        }
+
         public async Task<Student> GetStudent(Guid studentId)
         {
             return await context.Student.Include(nameof(Address)).Include(nameof(Gender)).FirstOrDefaultAsync(x => x.Id == studentId);

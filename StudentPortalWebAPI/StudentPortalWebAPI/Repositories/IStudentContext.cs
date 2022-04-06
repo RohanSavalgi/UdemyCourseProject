@@ -10,5 +10,7 @@ namespace StudentPortalWebAPI.Repositories
         public Task<List<Student>> GetStudents();
 
         public Task<Student> GetStudent(Guid studentId);
+
+        public Task<List<Gender>> GetGenders();
     }
 }
