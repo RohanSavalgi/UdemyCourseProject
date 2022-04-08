@@ -40,5 +40,21 @@ namespace StudentPortalWebAPI.Controllers
             }
             return Ok(mapper.Map<Student>(student));
         }
+
+        [HttpPut]
+        [Route("[controller]/{studentId:guid}")]
+        public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
+        {
+            if (await studentContext.Exists(studentId))
+            {
+                //update details
+                var updateStudent = await studentContext.updateStudent(studentId, mapper.Map<DataModels.Student>(request));
+                if (updateStudent != null)
+                {
+                    return Ok(mapper.Map<Student>(updateStudent));
+                }
+            }
+            return NotFound();
+        }
     }
 }
