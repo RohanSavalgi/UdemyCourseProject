@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StudentAdminPortal.API.DomainModels;
 using StudentPortalWebAPI.AutoMapperProfiles.SubMapper;
 using StudentPortalWebAPI.DataModels;
 using DomainModels = StudentPortalWebAPI.DomainModels;
@@ -13,8 +14,8 @@ namespace StudentPortalWebAPI.AutoMapperProfiles
             CreateMap<Student, DomainModels.Student>().ReverseMap();
             CreateMap<Gender, DomainModels.Gender>().ReverseMap();
             CreateMap<Address, DomainModels.Address>().ReverseMap();
-            CreateMap<DomainModels.UpdateStudentRequest, Student>()
-                .AfterMap<UpdateMapper>();
+            CreateMap<UpdateStudentRequest, Student>()
+                .AfterMap<UpdateStudentRequestAfterMap>();
         }
     }
 }

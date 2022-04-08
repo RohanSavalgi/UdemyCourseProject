@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using StudentPortalWebAPI.DomainModels;
+using StudentAdminPortal.API.DomainModels;
 using DataModel = StudentPortalWebAPI.DataModels;
 
 namespace StudentPortalWebAPI.AutoMapperProfiles.SubMapper
 {
-    public class UpdateMapper : IMappingAction<UpdateStudentRequest, DataModel.Student>
+    public class UpdateStudentRequestAfterMap : IMappingAction<UpdateStudentRequest, DataModel.Student>
     {
         public void Process(UpdateStudentRequest source, DataModel.Student destination, ResolutionContext context)
         {

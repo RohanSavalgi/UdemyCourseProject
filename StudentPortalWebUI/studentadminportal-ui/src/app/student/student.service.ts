@@ -22,4 +22,9 @@ export class StudentService {
     return this.httpClient.get<student>(this.baseApiUrl + "/student/" + studentId);
   }
 
+  deleteStudent(studentId: string): Observable<student>
+  {
+    return this.httpClient.delete<student>(this.baseApiUrl + "/Student/" + studentId)
+  }
+
 }

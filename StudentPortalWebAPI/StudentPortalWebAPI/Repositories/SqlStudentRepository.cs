@@ -16,6 +16,19 @@ namespace StudentPortalWebAPI.Repositories
             this.context = context;
         }
 
+        public async Task<Student> Delete(Guid studentId)
+        {
+            var student = await GetStudent(studentId);
+
+            if(student != null)
+            {
+                context.Student.Remove(student);
+                await context.SaveChangesAsync();
+                return student;
+            }
+            return null;
+        }
+
         public async Task<bool> Exists(Guid studentId)
         {
             return await context.Student.AnyAsync(x => x.Id == studentId);
@@ -36,14 +49,13 @@ namespace StudentPortalWebAPI.Repositories
             return await context.Student.Include(nameof(Gender)).Include(nameof(Address)).ToListAsync();
         }
 
-        public async Task<Student> updateStudent(Guid studentId, Student request)
+        public async Task<Student> UpdateStudent(Guid studentId, Student request)
         {
             var existingStudent = await GetStudent(studentId);
-
             if (existingStudent != null)
             {
-                existingStudent.FirstName = request.FirstName;
                 existingStudent.LastName = request.LastName;
+                existingStudent.FirstName = request.FirstName;
                 existingStudent.DateOfBirth = request.DateOfBirth;
                 existingStudent.Email = request.Email;
                 existingStudent.Mobile = request.Mobile;
@@ -52,14 +64,10 @@ namespace StudentPortalWebAPI.Repositories
                 existingStudent.Address.PostalAddress = request.Address.PostalAddress;
 
                 await context.SaveChangesAsync();
-
                 return existingStudent;
             }
-            else
-            {
-                return null;
-            }
 
+            return null;
         }
     }
 }
