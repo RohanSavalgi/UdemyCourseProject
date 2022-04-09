@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using StudentAdminPortal.API.DomainModels;
+using StudentPortalWebAPI.DomainModels;
 using DataModel = StudentPortalWebAPI.DataModels;
 
 namespace StudentPortalWebAPI.AutoMapperProfiles.SubMapper

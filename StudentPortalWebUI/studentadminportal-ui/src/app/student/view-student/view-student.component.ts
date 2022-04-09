@@ -33,6 +33,10 @@ export class ViewStudentComponent implements OnInit {
       physicalAddress: '',
     }
   }
+
+  newStudent:boolean = true;
+  header = '';
+
   genderList: gender[] = [];
   constructor(private studentService: StudentService,
     private route:ActivatedRoute,
@@ -43,22 +47,34 @@ export class ViewStudentComponent implements OnInit {
 
   ngOnInit(): void
   {
+    // if not existing the
+    // -> new create student
+
     this.route.paramMap.subscribe(
       (params) => {
         this.studentId = params.get('id')
 
         if(this.studentId)
         {
-          this.studentService.getStudent(this.studentId)
-          .subscribe(
-            (successResponse) =>{
-              this.studentData = successResponse;
+          if(this.studentId.toLowerCase() == 'add'.toLowerCase())
+          {
+            this.newStudent = true;
+            this.header = 'Add New Student';
+          }
+          else {
+            this.newStudent = false;
+            this.header = 'Edit Student';
+            //body
+            if(this.studentId)
+            {
+              this.studentService.getStudent(this.studentId)
+              .subscribe(
+                (successResponse) =>{
+                  this.studentData = successResponse;
+                }
+              )
             }
-          )
-        }
-      }
-    )
-
+      }}})
     this.genderService.getGenders().subscribe(
       (successResponse) => {
         this.genderList = successResponse;
@@ -72,10 +88,27 @@ export class ViewStudentComponent implements OnInit {
       (successResponse) => {
         console.log(this.studentData.id);
         this.snackBar.open('Student Delete Successfully',undefined, {
-          duration: 3000
+          duration: 2000
         });
         setTimeout(() => {
           this.router.navigateByUrl('student');
+        }, 3000);
+      }
+    )
+  }
+
+  onAdd(): void
+  {
+    this.studentService.addStudent(this.studentData).subscribe(
+      (successResponse) => {
+        console.log(successResponse);
+
+        this.snackBar.open("Student Added Successfully",undefined,{
+          duration:2000
+        })
+
+        setTimeout(() => {
+          this.router.navigateByUrl(`Student/${successResponse.id}`);
         }, 3000);
       }
     )

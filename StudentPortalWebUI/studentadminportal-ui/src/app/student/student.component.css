@@ -23,6 +23,12 @@ table{
   margin:1em;
 }
 
+.newButton{
+  outline: none;
+  margin:1em;
+}
+
+
 .searchBox:active{
   border: 1px solid #c2185b;
 

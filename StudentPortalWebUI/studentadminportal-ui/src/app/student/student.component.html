@@ -5,7 +5,15 @@
 </div>
 
 <div class="row center-xs">
-  <div class="col-xs-8 end-sm">
+  <div class="col-xs-4 start-xs">
+    <a routerLink="/Student/add">
+      <button mat-raised-button  color="accent" class="newButton">
+        <mat-icon>person</mat-icon>
+        Create New Student
+      </button>
+    </a>
+  </div>
+  <div class="col-xs-4 end-sm">
     <input class="searchBox" type="text" placeholder="Search students"
     [(ngModel)] = "filterString"
     (keyup) = "filterFunction()"

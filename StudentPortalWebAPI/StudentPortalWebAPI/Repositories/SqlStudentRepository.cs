@@ -16,6 +16,13 @@ namespace StudentPortalWebAPI.Repositories
             this.context = context;
         }
 
+        public async Task<Student> AddStudent(Student request)
+        {
+            var student = await context.AddAsync(request);
+            await context.SaveChangesAsync();
+            return student.Entity;
+        }
+
         public async Task<Student> Delete(Guid studentId)
         {
             var student = await GetStudent(studentId);
