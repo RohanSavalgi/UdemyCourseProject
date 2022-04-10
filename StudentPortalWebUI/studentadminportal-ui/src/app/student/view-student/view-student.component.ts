@@ -113,4 +113,26 @@ export class ViewStudentComponent implements OnInit {
       }
     )
   }
+
+  onUpdate(): void{
+
+    if(this.studentId != null)
+    {
+      this.studentService.updateStudent(this.studentId,this.studentData).subscribe(
+        (successResponse) => {
+          this.snackBar.open("Student Update Successfully.",undefined,{
+            duration:2000
+          })
+
+          setTimeout(() => {
+            this.router.navigateByUrl(`Student/${successResponse.id}`);
+          }, 3000);
+
+        },
+        (errorResponse) => {
+          console.log(errorResponse);
+        }
+      )
+    }
+  }
 }

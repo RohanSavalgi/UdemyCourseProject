@@ -84,7 +84,7 @@
    </div>
    <div class="row">
      <div class="col-xs-6 start-xs">
-      <button mat-raised-button color="primary" *ngIf="!newStudent">
+      <button (click)="onUpdate()" mat-raised-button color="primary" *ngIf="!newStudent">
         Update
       </button>
      </div>
