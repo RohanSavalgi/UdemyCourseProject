@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentPortalWebAPI.DomainModels;
 using StudentPortalWebAPI.Repositories;
@@ -12,11 +13,13 @@ namespace StudentPortalWebAPI.Controllers
     {
         private readonly IStudentContext studentContext;
         private readonly IMapper mapper;
+        private readonly IUploadRepo imageContext;
 
-        public StudentController(IStudentContext studentContext, IMapper mapper)
+        public StudentController(IStudentContext studentContext, IMapper mapper, IUploadRepo imageContext)
         {
             this.studentContext = studentContext;
             this.mapper = mapper;
+            this.imageContext = imageContext;
         }
 
         [HttpGet]
@@ -78,6 +81,28 @@ namespace StudentPortalWebAPI.Controllers
             var student = await studentContext.AddStudent(mapper.Map<DataModels.Student>(request));
             return CreatedAtAction(nameof(GetStudent), new { studentId = student.Id },
                 mapper.Map<DataModels.Student>(student));
+        }
+
+        [HttpPost]
+        [Route("[controller]/{studentId:guid}/upload-image")]
+        public async Task<IActionResult> UploadImage([FromRoute] Guid studentId, IFormFile profileImage)
+        {
+            if(await studentContext.Exists(studentId))
+            {
+                var fileName = Guid.NewGuid() + profileImage.FileName;
+
+                var fileImageaPath = await imageContext.Upload(profileImage, fileName);
+
+                if(await studentContext.UpdateProfileImage(studentId, fileImageaPath))
+                {
+                    return Ok(fileImageaPath);
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, "error uploading image");
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

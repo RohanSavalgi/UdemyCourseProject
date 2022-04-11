@@ -44,6 +44,7 @@ namespace StudentPortalWebAPI
             services.AddControllers();
             services.AddDbContext<StudentAdminContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
             services.AddScoped<IStudentContext, SqlStudentRepository>();
+            services.AddScoped<IUploadRepo, uploadImageRepository>();
             services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
