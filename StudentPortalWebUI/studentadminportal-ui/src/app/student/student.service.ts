@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { student } from '../models/api-models/student.model';
 import { updateStudentRequest } from '../models/api-models/update-student-request.model';
 
@@ -9,7 +10,7 @@ import { updateStudentRequest } from '../models/api-models/update-student-reques
 })
 export class StudentService {
 
-  private baseApiUrl = "https://localhost:44393";
+  private baseApiUrl = environment.baseApiUrl;
 
   constructor(private httpClient : HttpClient) { }
 
@@ -28,9 +29,20 @@ export class StudentService {
     return this.httpClient.delete<student>(this.baseApiUrl + "/Student/" + studentId);
   }
 
-  addStudent(pass: student) : Observable<student>
+  addStudent(studentRequest: student) : Observable<student>
   {
-    return this.httpClient.post<student>(this.baseApiUrl + "/Student/Add",pass);
+    const updateStudentModel: updateStudentRequest = {
+      firstName: studentRequest.firstName,
+      lastName: studentRequest.lastName,
+      dateOfBirth: studentRequest.dateOfBirth,
+      email: studentRequest.email,
+      mobile: studentRequest.mobile,
+      genderId: studentRequest.genderId,
+      physicalAddress: studentRequest.address.physicalAddress,
+      postalAddress: studentRequest.address.postalAddress,
+      profileImageUrl: studentRequest.profileImageUrl
+    }
+    return this.httpClient.post<student>(this.baseApiUrl + "/Student/Add",updateStudentModel);
   }
 
   updateStudent(studentId: string, studentRequest: student) : Observable<student>
@@ -42,8 +54,8 @@ export class StudentService {
       email: studentRequest.email,
       mobile: studentRequest.mobile,
       genderId: studentRequest.genderId,
-      physicalAddress: studentRequest.address.id,
-      postalAddress: studentRequest.address.id,
+      physicalAddress: studentRequest.address.physicalAddress,
+      postalAddress: studentRequest.address.postalAddress,
       profileImageUrl: studentRequest.profileImageUrl
     }
     return this.httpClient.put<student>(this.baseApiUrl + "/Student/" + studentId,updateStudentModel);

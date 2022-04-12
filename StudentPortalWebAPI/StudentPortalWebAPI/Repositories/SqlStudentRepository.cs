@@ -58,13 +58,15 @@ namespace StudentPortalWebAPI.Repositories
 
         public async Task<bool> UpdateProfileImage(Guid studentId, string imagePath)
         {
-            var student = await this.GetStudent(studentId);
-            if(student != null)
+            var student = await GetStudent(studentId);
+
+            if (student != null)
             {
                 student.ProfileImageUrl = imagePath;
                 await context.SaveChangesAsync();
                 return true;
             }
+
             return false;
         }
 

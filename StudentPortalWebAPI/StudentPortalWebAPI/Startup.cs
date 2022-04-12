@@ -1,19 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StudentPortalWebAPI.DataModels;
 using StudentPortalWebAPI.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 
 namespace StudentPortalWebAPI
 {
@@ -42,9 +36,10 @@ namespace StudentPortalWebAPI
             });
 
             services.AddControllers();
+            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddDbContext<StudentAdminContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
             services.AddScoped<IStudentContext, SqlStudentRepository>();
-            services.AddScoped<IUploadRepo, uploadImageRepository>();
+            services.AddScoped<IUploadRepo, UploadImageRepository>();
             services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>

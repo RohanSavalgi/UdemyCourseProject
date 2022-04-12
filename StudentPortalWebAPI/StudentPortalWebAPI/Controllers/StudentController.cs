@@ -5,6 +5,7 @@ using StudentPortalWebAPI.DomainModels;
 using StudentPortalWebAPI.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace StudentPortalWebAPI.Controllers
@@ -87,23 +88,36 @@ namespace StudentPortalWebAPI.Controllers
         [Route("[controller]/{studentId:guid}/upload-image")]
         public async Task<IActionResult> UploadImage([FromRoute] Guid studentId, IFormFile profileImage)
         {
-            if(await studentContext.Exists(studentId))
+            var validExtensions = new List<string>
             {
-                var fileName = Guid.NewGuid() + profileImage.FileName;
+               ".jpeg",
+               ".png",
+               ".gif",
+               ".jpg"
+            };
 
-                var fileImageaPath = await imageContext.Upload(profileImage, fileName);
-
-                if(await studentContext.UpdateProfileImage(studentId, fileImageaPath))
+            if (profileImage != null && profileImage.Length > 0)
+            {
+                var extension = Path.GetExtension(profileImage.FileName);
+                if (validExtensions.Contains(extension))
                 {
-                    return Ok(fileImageaPath);
-                }
-                return StatusCode(StatusCodes.Status500InternalServerError, "error uploading image");
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+                    if (await studentContext.Exists(studentId))
+                    {
+                        var fileName = Guid.NewGuid() + Path.GetExtension(profileImage.FileName);
 
+                        var fileImagePath = await imageContext.Upload(profileImage, fileName);
+
+                        if (await studentContext.UpdateProfileImage(studentId, fileImagePath))
+                        {
+                            return Ok(fileImagePath);
+                        }
+
+                        return StatusCode(StatusCodes.Status500InternalServerError, "Error uploading image");
+                    }
+                }
+                return BadRequest("This is not a valid Image format");
+            }
+            return NotFound();
+        }
     }
 }

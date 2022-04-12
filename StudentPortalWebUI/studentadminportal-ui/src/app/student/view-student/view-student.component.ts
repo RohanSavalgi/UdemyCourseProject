@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { gender } from 'src/app/models/api-models/gender.model';
@@ -33,6 +34,8 @@ export class ViewStudentComponent implements OnInit {
       physicalAddress: '',
     }
   }
+
+  @ViewChild("updateForm") valid? : NgForm;
 
   newStudent:boolean = true;
   header = '';
@@ -70,6 +73,7 @@ export class ViewStudentComponent implements OnInit {
               this.studentService.getStudent(this.studentId)
               .subscribe(
                 (successResponse) =>{
+                  console.log(successResponse);
                   this.studentData = successResponse;
                 }
               )
@@ -99,40 +103,50 @@ export class ViewStudentComponent implements OnInit {
 
   onAdd(): void
   {
-    this.studentService.addStudent(this.studentData).subscribe(
-      (successResponse) => {
-        console.log(successResponse);
-
-        this.snackBar.open("Student Added Successfully",undefined,{
-          duration:2000
-        })
-
-        setTimeout(() => {
-          this.router.navigateByUrl(`Student/${successResponse.id}`);
-        }, 3000);
-      }
-    )
-  }
-
-  onUpdate(): void{
-
-    if(this.studentId != null)
+    if(this.valid?.form.valid)
     {
-      this.studentService.updateStudent(this.studentId,this.studentData).subscribe(
+      console.log(this.studentData);
+      this.studentService.addStudent(this.studentData).subscribe(
         (successResponse) => {
-          this.snackBar.open("Student Update Successfully.",undefined,{
+          this.snackBar.open("Student Added Successfully",undefined,{
             duration:2000
           })
 
           setTimeout(() => {
             this.router.navigateByUrl(`Student/${successResponse.id}`);
           }, 3000);
-
         },
         (errorResponse) => {
           console.log(errorResponse);
         }
       )
+    }
+}
+
+
+  onUpdate(): void{
+
+    if(this.valid?.form.valid)
+    {
+      if(this.studentId != null)
+      {
+        this.studentService.updateStudent(this.studentId,this.studentData).subscribe(
+          (successResponse) => {
+            console.log(this.studentData);
+            this.snackBar.open("Student Update Successfully.",undefined,{
+              duration:2000
+            })
+
+            setTimeout(() => {
+              this.router.navigateByUrl(`Student/${successResponse.id}`);
+            }, 3000);
+
+          },
+          (errorResponse) => {
+            console.log(errorResponse);
+          }
+        )
+      }
     }
   }
 }

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "T49O7lBYnSB9qc9yJYxkNayRistVXKCwzi6N7tBJB4f5AXqOO7LOcExOC+G1m4KjXu7x+crN0OnVCOyy6qYK6A==",
+  "dgSpecHash": "8uZU8drrC/l5VATodjRoFqqDZC/OpwyLI4VdRxBgpD81Lcb/FD0tsEILxgTa6IlFwITfV0d0SwZ7jj+06+vCjA==",
   "success": true,
   "projectFilePath": "C:\\Users\\saval\\OneDrive\\Documents\\GitHub\\UdemyCourseProject\\StudentPortalWebAPI\\StudentPortalWebAPI\\StudentPortalWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\saval\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\saval\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\saval\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512",
+    "C:\\Users\\saval\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.3\\fluentvalidation.aspnetcore.10.3.3.nupkg.sha512",
+    "C:\\Users\\saval\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.3\\fluentvalidation.dependencyinjectionextensions.10.3.3.nupkg.sha512",
     "C:\\Users\\saval\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\saval\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\saval\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

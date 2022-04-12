@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\StudentPortalWebAPI",
-    "\\StudentPortalWebAPI\\Controllers"
+    "\\StudentPortalWebAPI"
   ],
   "SelectedNode": "\\StudentPortalWebAPI.sln",
   "PreviewInSolutionExplorer": false
