@@ -60,4 +60,10 @@ export class StudentService {
     }
     return this.httpClient.put<student>(this.baseApiUrl + "/Student/" + studentId,updateStudentModel);
   }
+
+  addProfileImage(studentId : string,fileName : string) : Observable<student>
+  {
+    return this.httpClient.post<student>(this.baseApiUrl + studentId + "/upload-image",fileName);
+  }
+
 }

@@ -18,3 +18,11 @@
 .mat-form-field{
   width:100%
 }
+
+.imageContainer{
+  border: solid 2px grey;
+  width: 50%;
+  height: 50%;
+  border-radius: 40%;
+}
+

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,7 +27,7 @@ export class ViewStudentComponent implements OnInit {
     genderId: '',
     gender: {
       id: '',
-    description: ''
+      description: ''
     },
     address: {
       id: '',
@@ -39,6 +40,8 @@ export class ViewStudentComponent implements OnInit {
 
   newStudent:boolean = true;
   header = '';
+  displayProfileImage = '';
+
 
   genderList: gender[] = [];
   constructor(private studentService: StudentService,
@@ -63,6 +66,7 @@ export class ViewStudentComponent implements OnInit {
           {
             this.newStudent = true;
             this.header = 'Add New Student';
+            this.setImage();
           }
           else {
             this.newStudent = false;
@@ -75,6 +79,10 @@ export class ViewStudentComponent implements OnInit {
                 (successResponse) =>{
                   console.log(successResponse);
                   this.studentData = successResponse;
+                  this.setImage();
+                },
+                (errorResponse) => {
+                  console.log(errorResponse);
                 }
               )
             }
@@ -123,7 +131,6 @@ export class ViewStudentComponent implements OnInit {
     }
 }
 
-
   onUpdate(): void{
 
     if(this.valid?.form.valid)
@@ -148,5 +155,28 @@ export class ViewStudentComponent implements OnInit {
         )
       }
     }
+  }
+
+  private setImage(): void{
+    console.log("Entered the setImage function");
+    if(this.studentData.profileImageUrl == null)
+    {
+      this.displayProfileImage = this.studentData.profileImageUrl;
+    }
+    else
+    {
+      this.displayProfileImage = '/assets/images/image.png';
+    }
+  }
+
+  uploadImage() :void{
+    this.studentService.addProfileImage(this.studentData.id , this.displayProfileImage).subscribe(
+      (successResponse) => {
+        console.log(successResponse);
+      },
+      (errorResponse) => {
+        console.log(errorResponse());
+      }
+    )
   }
 }
